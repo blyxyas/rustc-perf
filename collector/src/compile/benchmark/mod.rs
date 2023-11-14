@@ -196,6 +196,13 @@ impl Benchmark {
             cargo_args.push(format!("-j{}", count));
         }
 
+        if let Some(zthreads) = std::env::var("RUSTC_PERF_ZTHREADS")
+            .ok()
+            .and_then(|v| v.parse::<usize>().ok())
+        {
+            cargo_args.push(format!("-Zthreads {}", zthreads))
+        }
+
         CargoProcess {
             toolchain,
             processor_name: self.name.clone(),
@@ -232,6 +239,7 @@ impl Benchmark {
         backends: &[CodegenBackend],
         toolchain: &Toolchain,
         iterations: Option<usize>,
+        zthreads: usize
     ) -> anyhow::Result<()> {
         if self.config.disabled {
             eprintln!("Skipping {}: disabled", self.name);
@@ -301,6 +309,9 @@ impl Benchmark {
             let mut threads = Vec::with_capacity(target_dirs.len());
             for ((backend, profile), prep_dir) in &target_dirs {
                 let server = server.clone();
+                if zthreads > 0 {
+                    
+                }
                 let thread = s.spawn::<_, anyhow::Result<()>>(move || {
                     wait_for_future(async move {
                         let server = server.clone();
