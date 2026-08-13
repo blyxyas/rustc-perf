@@ -1,5 +1,5 @@
 [workspace]
-members = ["collector", "collector/benchlib", "site", "database", "intern"]
+members = ["collector", "collector/benchlib", "site", "database", "intern", "site/frontend/rust-clippy"]
 exclude = ["rust/src"]
 resolver = "2"
 
@@ -23,3 +23,7 @@ debug = 1
 
 [profile.release.package.collector]
 debug = 1
+
+[profile.clippy-build]
+inherits = "release"
+debug = true

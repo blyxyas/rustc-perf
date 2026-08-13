@@ -6,6 +6,7 @@
     "install-perfetto": "./download_perfetto.sh",
     "watch": "parcel watch --no-hmr",
     "build": "parcel build",
+    "build-clippy": "./build_clippy.sh",
     "fmt": "prettier --write src",
     "check": "vue-tsc -p tsconfig.json --noEmit && prettier --check src"
   },
