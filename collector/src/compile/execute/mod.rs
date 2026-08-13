@@ -440,6 +440,7 @@ impl<'a> CargoProcess<'a> {
                     // and similar.
                     let mut rustflags = env::var("RUSTFLAGS").unwrap_or_default();
                     rustflags.push_str(" -Wclippy::all");
+                    rustflags.push_str(&format!("-Wclippy::{needs_final}"));
                     cmd.env("RUSTFLAGS", rustflags);
                 }
                 Profile::Debug => {}
@@ -473,6 +474,7 @@ impl<'a> CargoProcess<'a> {
             // out nicely because `cargo rustc` only passes arguments after '--'
             // onto rustc for the final crate, which is exactly the crate for which
             // we want to wrap rustc.
+
             if needs_final {
                 if let Profile::Clippy = self.profile {
                     // For Clippy, we still invoke `cargo rustc`, but we need to override the
@@ -499,9 +501,9 @@ impl<'a> CargoProcess<'a> {
                 // If we're using a processor, we expect that only the crate
                 // we're interested in benchmarking will be built, not any
                 // dependencies.
-                if !processor.perf_tool().calls_cargo_recursively() {
-                    cmd.env("EXPECT_ONLY_WRAPPED_RUSTC", "1");
-                }
+                // if !processor.perf_tool().calls_cargo_recursively() {
+                //     cmd.env("EXPECT_ONLY_WRAPPED_RUSTC", "1");
+                // }
                 cmd.arg("--wrap-rustc-with");
                 cmd.arg(perf_tool_name);
                 cmd.args(&self.rustc_args);
