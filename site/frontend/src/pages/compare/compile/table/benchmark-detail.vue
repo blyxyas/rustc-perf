@@ -50,6 +50,41 @@ function benchmarkLink(benchmark: string): string {
   return `https://github.com/rust-lang/rustc-perf/tree/master/collector/compile-benchmarks/${benchmark}`;
 }
 
+function profileLink(testCase: CompileTestCase): string {
+  let scenario;
+  console.log(`${testCase.scenario}`);
+  switch (`${testCase.scenario}`) {
+    case "incr-unchanged":
+        scenario = "IncrUnchanged";
+        break;
+    case "full":
+        scenario = "Full";
+        break;
+    case "incr-full":
+        scenario = "IncrFull";
+        break;
+    case "incr-patched":
+        scenario = "IncrPatched";
+        break;
+    default:
+        break;
+  }
+
+  let profile;
+  switch (`${testCase.profile}`) {
+    case "clippy":
+        profile = "Clippy";
+        break;
+    case "check":
+        profile = "Check";
+        break;
+    default:
+      break;
+  }
+
+  return `/results/cgann-${testCase.target}-${testCase.benchmark}-${profile}-${scenario}-Threads1`;
+}
+
 function detailedQueryLink(
   commit: ArtifactDescription,
   baseCommit?: ArtifactDescription
@@ -193,6 +228,9 @@ onMounted(() => {
               Benchmark source code
             </a>
           </li>
+          <li>
+              <a :href="profileLink(testCase)">Link to profile</a>
+           </li>
         </ul>
       </div>
     </div>

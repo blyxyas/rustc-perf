@@ -440,7 +440,6 @@ impl<'a> CargoProcess<'a> {
                     // and similar.
                     let mut rustflags = env::var("RUSTFLAGS").unwrap_or_default();
                     rustflags.push_str(" -Wclippy::all");
-                    rustflags.push_str(&format!("-Wclippy::{needs_final}"));
                     cmd.env("RUSTFLAGS", rustflags);
                 }
                 Profile::Debug => {}
