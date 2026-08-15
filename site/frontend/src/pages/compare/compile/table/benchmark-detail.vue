@@ -82,7 +82,7 @@ function profileLink(testCase: CompileTestCase): string {
       break;
   }
 
-  return `/results/cgann-${testCase.target}-${testCase.benchmark}-${profile}-${scenario}-Threads1`;
+  return `https://cdn2.blyxyas.eu/results/cgann-${testCase.target}-${testCase.benchmark}-${profile}-${scenario}-Threads1`;
 }
 
 function detailedQueryLink(
