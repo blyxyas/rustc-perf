@@ -50,7 +50,7 @@ function benchmarkLink(benchmark: string): string {
   return `https://github.com/rust-lang/rustc-perf/tree/master/collector/compile-benchmarks/${benchmark}`;
 }
 
-function profileLink(testCase: CompileTestCase): string {
+function profileLink(testCase: CompileTestCase, commit: ArtifactDescription): string {
   let scenario;
   console.log(`${testCase.scenario}`);
   switch (`${testCase.scenario}`) {
@@ -82,7 +82,7 @@ function profileLink(testCase: CompileTestCase): string {
       break;
   }
 
-  return `https://cdn2.blyxyas.eu/results/cgann-${testCase.target}-${testCase.benchmark}-${profile}-${scenario}-Threads1`;
+  return `https://cdn2.blyxyas.eu/results/clgann-${commit.commit}-${testCase.benchmark}-${profile}-${scenario}-Threads1`;
 }
 
 function detailedQueryLink(
@@ -229,7 +229,7 @@ onMounted(() => {
             </a>
           </li>
           <li>
-              <a :href="profileLink(testCase)">Link to profile</a>
+              <a :href="profileLink(testCase, props.artifact)">Link to profile</a>
            </li>
         </ul>
       </div>
