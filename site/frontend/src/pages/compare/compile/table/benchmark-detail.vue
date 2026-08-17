@@ -82,7 +82,7 @@ function profileLink(testCase: CompileTestCase, commit: ArtifactDescription): st
       break;
   }
 
-  return `https://cdn2.blyxyas.eu/results/clgann-${commit.commit}-${testCase.benchmark}-${profile}-${scenario}-Threads1`;
+  return `https://yuno.tail64ca8e.ts.net/results/clgann-${commit.commit}-${testCase.benchmark}-${profile}-${scenario}-Threads1`;
 }
 
 function detailedQueryLink(
