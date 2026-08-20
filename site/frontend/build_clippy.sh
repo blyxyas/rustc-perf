@@ -29,8 +29,8 @@ EXTRA_ARGS="--exclude cargo-0.87.1 \
 # cargo r --bin collector -r profile_local callgrind +nightly-2026-08-14 --profiles Clippy,Check --clippy site/frontend/rust-clippy/target/clippy-build/clippy-driver
 # cargo r --bin collector -r bench_local +nightly-2026- --profiles Clippy,Check --clippy site/frontend/rust-clippy/target/clippy-build/clippy-driver
 
-cargo r --bin collector -r profile_local callgrind +nightly-$(date '+%Y-%m-%d') --profiles Clippy,Check --clippy site/frontend/rust-clippy/target/clippy-build/clippy-driver
-cargo r --bin collector -r bench_local +nightly-$(date '+%Y-%m-%d') --profiles Clippy,Check --clippy site/frontend/rust-clippy/target/clippy-build/clippy-driver
+cargo r --bin collector -r profile_local callgrind +nightly-$(date '+%Y-%m-%d') --profiles Clippy,Check --clippy site/frontend/rust-clippy/target/clippy-build/clippy-driver $EXTRA_ARGS
+cargo r --bin collector -r bench_local +nightly-$(date '+%Y-%m-%d') --profiles Clippy,Check --clippy site/frontend/rust-clippy/target/clippy-build/clippy-driver $EXTRA_ARGS
 # cargo r --bin collector -r profile_local callgrind +nightly-$1 --profiles Clippy,Check --clippy site/frontend/rust-clippy/target/clippy-build/clippy-driver $EXTRA_ARGS
 # cargo r --bin collector -r bench_local +nightly-$1 --profiles Clippy,Check --clippy site/frontend/rust-clippy/target/clippy-build/clippy-driver $EXTRA_ARGS
 exit 0
