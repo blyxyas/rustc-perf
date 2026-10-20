@@ -1,17 +1,22 @@
 #!/bin/bash
 export LC_ALL=C.UTF-8
 set -eux
-. "$HOME/.cargo/env"
+#. "$HOME/.cargo/env"
+
+if cd rust-clippy; then git pull; else git clone https://github.com/rust-lang/rust-clippy && cd rust-clippy; fi
+
+cargo build -r
+#export LD_LIBRARY_PATH="/home/CuiESgqXgcW2CX9LiyDB/.rustup/toolchains/nightly-$(date --date="1 days ago" '+%Y-%m-%d')-unknown-linux-gnu/lib"
+export LD_LIBRARY_PATH="$(rustc --print=sysroot)/lib"
+#export LD_LIBRARY_PATH="/home/CuiESgqXgcW2CX9LiyDB/.rustup/toolchains/nightly-2026-10-16-x86_64-unknown-linux-gnu/lib/"
+
+cp rust-toolchain.toml ../../../
+
+cd ../../../ # Back to project root
 
 cargo b -r -p collector --bin rustc-fake
 cargo b -r -p collector
 cargo b -r
-
-if cd rust-clippy; then git pull; else git clone https://github.com/rust-lang/rust-clippy && cd rust-clippy; fi
-
-cargo build --profile clippy-build
-export LD_LIBRARY_PATH="$(rustc --print=sysroot)/lib"
-cd ../../../ # Back to project root
 
 # These ones depend on libc, which we cannot compile for some reason
 #EXTRA_ARGS="--exclude cargo-0.87.1,eza-0.21.2,html5ever-0.31.0,html5ever-0.31.0-new-solver,image-0.25.6,libc-0.2.172,nalgebra-0.33.0,projection-caching,ripgrep-14.1.1,ripgrep-14.1.1-nll,ripgrep-14.1.1-tiny"
